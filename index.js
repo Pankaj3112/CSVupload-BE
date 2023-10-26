@@ -5,6 +5,11 @@ const db = require("./config/mongoose");
 const upload = require("express-fileupload");
 const path = require("path");
 
+const cors = require('cors');
+app.use(cors({
+    origin: 'http://localhost:5173/'
+}));
+
 //parser for form data
 app.use(
   express.urlencoded({
@@ -14,12 +19,6 @@ app.use(
 
 //using express-fileupload
 app.use(upload());
-
-// Allow all origins
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
 
 //routes
 app.use("/", require("./routes"));
